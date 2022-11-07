@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -105,7 +105,49 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: 3DS - The Trash Pack - Stage 2_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 241.5
+        width: 454
+        height: 241.5
+      alignment: 5
+      pivot: {x: 1, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d58e116506071b48a2d893c75139824
+      internalID: 864608690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 3DS - The Trash Pack - Stage 2_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0.5
+        width: 454
+        height: 241.5
+      alignment: 5
+      pivot: {x: 1, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdefd5857d6892640bce1fe02c28c7c0
+      internalID: -1329227270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -116,7 +158,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      3DS - The Trash Pack - Stage 2_0: 864608690
+      3DS - The Trash Pack - Stage 2_1: -1329227270
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 
