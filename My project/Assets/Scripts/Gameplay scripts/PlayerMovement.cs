@@ -43,8 +43,6 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-
         if (KBCounter <= 0)
         {
             keyHorizontal = Input.GetAxisRaw("Horizontal");
@@ -84,10 +82,10 @@ public class PlayerMovement : MonoBehaviour
                 rb2d.velocity = new Vector2(rb2d.velocity.x, jumpSpeed);
                 
             }
-            if (rb2d.velocity.y != 0) {
+            if (rb2d.velocity.y >= 0.1 || rb2d.velocity.y <= -0.1) {
                 anim.SetBool("isJumping", true);
             }
-            if (rb2d.velocity.y == 0)
+            if (rb2d.velocity.y <= 0.1 && rb2d.velocity.y >= -0.1)
             {
                 anim.SetBool("isJumping", false);
             }

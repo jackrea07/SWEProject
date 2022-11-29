@@ -13,12 +13,13 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         rb.velocity = transform.right * speed;
+        StartCoroutine(CountDownTimer());
     }
 
     // Update is called once per frame
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        if (hitInfo.gameObject.tag != "Player" && !hitInfo.isTrigger) {
+        if (hitInfo.gameObject.tag != "Player" && !hitInfo.isTrigger && hitInfo.gameObject.tag != "Firewall") {
             Enemy enemy = hitInfo.GetComponent<Enemy>();
             if (enemy != null) {
                 enemy.takeDamage(damage);
@@ -31,5 +32,10 @@ public class Bullet : MonoBehaviour
             Destroy(clone, 0.4f);
         }
         
+    }
+    IEnumerator CountDownTimer()
+    {
+        yield return new WaitForSeconds(3);
+        Destroy(gameObject);
     }
 }

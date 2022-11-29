@@ -47,5 +47,11 @@ public class Moveplat : MonoBehaviour
             playerMovement.resetParent();
 
         }
+        var enemy = other.collider.GetComponent<Enemy>();
+        if (enemy != null)
+        {
+            enemy.resetParent();
+
+        }
     }
 }

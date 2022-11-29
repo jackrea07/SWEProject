@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public levelchange leveler;
+    
     // Start is called before the first frame update
     public void playGame() {
-        leveler.fadetolevel("Test Scene");
+        SceneManager.LoadScene("Level 1");
 
         
     }

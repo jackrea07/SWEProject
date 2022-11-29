@@ -18,7 +18,10 @@ public class PlayerHealth : MonoBehaviour
     public Weapon wep;
     public bool disabled;
     public int numLives = 3;
-
+    public bool isInvincible = false;
+    public AudioSource source;
+    public AudioClip clip;
+    public AudioClip clip2;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +30,7 @@ public class PlayerHealth : MonoBehaviour
         wep = GetComponent<Weapon>();
         currentHealth = maxHealth;
         anim = GetComponent<Animator>();
+        gameObject.transform.position = respawnPoint.transform.position;
 
     }
 
@@ -45,6 +49,7 @@ public class PlayerHealth : MonoBehaviour
         else {
             disabled = true;
             anim.Play("hit");
+            source.PlayOneShot(clip2);
             StartCoroutine(invulnerability());
             StartCoroutine(wait1Sec());
         }
@@ -64,6 +69,7 @@ public class PlayerHealth : MonoBehaviour
 
     private IEnumerator invulnerability() {
         Physics2D.IgnoreLayerCollision(10,11,true);
+        isInvincible = true;
         for (int i = 0; i < numFlashes; i++)
         {
             sprite.color = new Color(1, 0, 0, 0.5f);
@@ -72,15 +78,18 @@ public class PlayerHealth : MonoBehaviour
             yield return new WaitForSeconds(iFrameLength / (numFlashes * 2));
         }
         Physics2D.IgnoreLayerCollision(10, 11, false);
+        isInvincible = false;
 
     }
     private IEnumerator die()
     {
-        
+        source.PlayOneShot(clip);
         currentHealth = 0;
         GameObject clone = Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(clone, 0.4f);
         sprite.enabled = false;
+        Physics2D.IgnoreLayerCollision(10, 11, true);
+        isInvincible = true;
         disabled = true;
         if (numLives > 0)
         {
@@ -88,7 +97,7 @@ public class PlayerHealth : MonoBehaviour
             gameObject.transform.position = respawnPoint.transform.position;
             sprite.enabled = true;
             currentHealth = maxHealth;
-            wep.currentAmmo = wep.maxAmmo;
+            wep.currentAmmo = wep.currentAmmo +10;
             anim.Play("Idle");
             disabled = false;
             StartCoroutine(invulnerability());

@@ -13,7 +13,7 @@ public class Damage : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" && !playerHealth.isInvincible)
         {
             if (playerHealth.currentHealth > 1)
             {
@@ -31,6 +31,7 @@ public class Damage : MonoBehaviour
            
         }
     }
+
 }
   
 

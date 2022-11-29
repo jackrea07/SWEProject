@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public int currentAmmo = 20;
-    public int maxAmmo = 20;
+    public int currentAmmo = 30;
+    public int maxAmmo = 99;
     bool keyFire;
     public Transform firePoint;
     public GameObject bullet;
@@ -15,13 +15,15 @@ public class Weapon : MonoBehaviour
     float releasetime;
     bool keyRelease;
     public PlayerHealth playerhealth;
+    public AudioSource source;
+    public AudioClip clip;
     // Start is called before the first frame update
     void Start()
     {
         shootTime = 0;
         releasetime = 0;
         playerhealth = GetComponent<PlayerHealth>();
-        currentAmmo = maxAmmo;
+        currentAmmo = 60;
         anim = GetComponent<Animator>();
     }
 
@@ -51,6 +53,7 @@ public class Weapon : MonoBehaviour
         }
     }
     void Shoot() {
+        source.PlayOneShot(clip);
         Instantiate(bullet,firePoint.position, firePoint.rotation);
     }
 }
