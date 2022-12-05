@@ -1,26 +1,40 @@
 # Use the latest 2.1 version of CircleCI pipeline process engine.
 # See: https://circleci.com/docs/2.0/configuration-reference
-version: 2.1
-
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
-jobs:
-  say-hello:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-    docker:
-      - image: cimg/base:stable
-    # Add steps to the job
-    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
-    steps:
-      - checkout
-      - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
-
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+version: '2.1'
+orbs:
+  unity: game-ci/unity@1.3.0
 workflows:
-  say-hello-workflow:
+  test-build-with-executors:
     jobs:
-      - say-hello
+      - checkout
+      - unity/test:
+          context: unity
+          executor:
+            editor_version: 2022.1.20f1
+            name: unity/windows-2022
+            size: large
+            target_platform: windows-il2cpp
+          name: test-windows
+          project-path: Unity2D-Demo-Game-CI-CD/src
+          step-name: Check if the tests run and results are uploaded
+          test-platform: playmode
+          unity-license-var-name: SC-XURT-KB6M-MRW5-29CT-4XYE
+          unity-password-var-name: Pancakes37&
+          unity-username-var-name: jackrea
+      - unity/build:
+          build-target: StandaloneWindows64
+          compress: true
+          context: unity
+          executor:
+            editor_version: 2022.1.20f1
+            name: unity/windows-2022
+            size: large
+            target_platform: windows-il2cpp
+          name: build-Windows64-il2cpp
+          project-path: Unity2D-Demo-Game-CI-CD/src
+          requires:
+            - test-windows
+          step-name: Build StandaloneWindows64 il2cpp
+          unity-license-var-name: SC-XURT-KB6M-MRW5-29CT-4XYE
+          unity-password-var-name: Pancakes37&
+          unity-username-var-name: jackrea
