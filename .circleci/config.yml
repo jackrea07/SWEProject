@@ -4,24 +4,16 @@
 version: '2.1'
 orbs:
   unity: game-ci/unity@1.3.0
+variables:
+  -name: password
+  value: Pancakes37&
+  -name2: email
+  value2: jackrea@ufl.edu
+  -name3: key
+  value3: SC-XURT-KB6M-MRW5-29CT-4XYE
 workflows:
-  test-build-with-executors:
+  build:
     jobs:
-      - checkout
-      - unity/test:
-          context: unity
-          executor:
-            editor_version: 2022.1.20f1
-            name: unity/windows-2022
-            size: large
-            target_platform: windows-il2cpp
-          name: test-windows
-          project-path: Unity2D-Demo-Game-CI-CD/src
-          step-name: Check if the tests run and results are uploaded
-          test-platform: playmode
-          unity-license-var-name: SC-XURT-KB6M-MRW5-29CT-4XYE
-          unity-password-var-name: Pancakes37&
-          unity-username-var-name: jackrea
       - unity/build:
           build-target: StandaloneWindows64
           compress: true
@@ -33,9 +25,7 @@ workflows:
             target_platform: windows-il2cpp
           name: build-Windows64-il2cpp
           project-path: Unity2D-Demo-Game-CI-CD/src
-          requires:
-            - test-windows
           step-name: Build StandaloneWindows64 il2cpp
-          unity-license-var-name: SC-XURT-KB6M-MRW5-29CT-4XYE
-          unity-password-var-name: Pancakes37&
-          unity-username-var-name: jackrea
+          unity-license-var-name: key
+          unity-password-var-name: password
+          unity-username-var-name: email
