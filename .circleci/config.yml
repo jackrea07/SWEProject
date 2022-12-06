@@ -24,7 +24,7 @@ workflows:
             size: large
             target_platform: windows-il2cpp
           name: build-Windows64-il2cpp
-          project-path: 'SWEProject/My project'
+          project-path: 'My project'
           step-name: Build StandaloneWindows64 il2cpp
           unity-license-var-name: key
           unity-password-var-name: password
